@@ -1,0 +1,32 @@
+Programming Assignment:
+
+Create a Spring Boot project that provides the REST endpoints for a basic inventory management system. For this project, the inventory system contains only a single entity named Item.
+ 
+Each item of data is a JSON object. Each such object has the following properties:
+•	itemId: the unique integer ID of the object
+•	itemName: the name of the item
+•	itemEnteredByUser: the name of the user entering the item
+•	itemEnteredDate: the timestamp at which the item is saved in the database (defaults to the current system timestamp)
+•	itemBuyingPrice: a Double value, up to one decimal place, denoting the item's buying price
+•	itemSellingPrice: a Double value, up to one decimal place, denoting the item's selling price
+•	itemLastModifiedDate: the timestamp at which the item is modified in the database (defaults to the current system timestamp)
+•	itemLastModifiedByUser: the name of the user modifying the item
+•	itemStatus: enum value, either AVAILABLE or SOLD
+ 
+Here is an example of an item data JSON object:
+    {
+    "itemId":1,
+    "itemName":"item_x",
+    "itemEnteredByUser":"user_x",
+    "itemEnteredDate":"2020-05-10T13:00:41.499",
+    "itemBuyingPrice":50.0,
+    "itemSellingPrice":55.0,
+    "itemLastModifiedDate":"2020-05-10T13:00:41.498",
+    "itemLastModifiedByUser":"user_y",
+    "itemStatus":"AVAILABLE"
+}
+ 
+1.	Implement the above 8 endpoints in the ItemController class, and the corresponding service methods in the ItemService class. Implement the POST request to /app/item first because testing the other methods requires POST to work correctly.
+2.	Protect these API endpoints via OpenID Connect/SAML/OAuth2.0. Use any free IDP providers like OKTA, Auth0, or Google if you can.
+3.	A Single Page App (SPA) to consume all the API endpoints through ReactJS/AngularJS components [screenshots below]
+4.	Deploy this application locally on your laptop OR with any cloud provider of your choice for a quick demo.

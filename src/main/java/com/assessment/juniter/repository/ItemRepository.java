@@ -15,4 +15,6 @@ public interface ItemRepository extends CrudRepository<Item, Integer> {
 
     Page<Item> findAll(Pageable pageable);
 
+    boolean existsByItemName(String itemName);
+
 }

@@ -1,5 +1,6 @@
 package com.assessment.juniter.service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,12 +25,18 @@ public class ItemService {
     }
 
     // Method to add default data for testing
-    public void createDefaultItemList(List<Item> items) {
-        itemRepository.saveAll(items);
-    }
+    // public void createDefaultItemList(List<Item> items) {
+    // itemRepository.saveAll(items);
+    // }
 
     public void createItem(Item item) {
-        if (!itemRepository.existsById(item.getItemId())) {
+        if (!itemRepository.existsByItemName(item.getItemName())) {
+            String user = "default_user";
+            item.setItemEnteredDate(LocalDateTime.now());
+            item.setItemEnteredByUser(user);
+            item.setItemLastModifiedByUser(user);
+            item.setItemLastModifiedDate(LocalDateTime.now());
+            item.setItemStatus(ItemStatus.AVAILABLE);
             itemRepository.save(item);
         } else {
             throw new DataIntegrityViolationException("Entry already exist for id=" + item.getItemId());

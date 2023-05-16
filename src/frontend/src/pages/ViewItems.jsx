@@ -1,9 +1,42 @@
-import React from 'react'
+import {React, useState, useEffect} from 'react'
+import ModifyItem from './ModifyItem';
+import DeleteItem from './DeleteItem';
 
 export default function ViewItems() {
+
+    const [items, setItems] = useState([]);
+
+    useEffect(() => {
+        const fetchAllProduct = async () =>{
+            const response = await fetch('/app/item');
+            const data = await response.json();
+            console.log(data);
+            setItems(data);
+        }
+
+        fetchAllProduct();
+    }, []);
+    
+    const dispayData = items.map((item) => {
+        return (
+            <tr>
+                <td className='text-center'>{item.itemName}</td>
+                <td className='text-center'>{item.itemSellingPrice}</td>
+                <td className='text-center'>{item.itemBuyingPrice}</td>
+                <td className='text-center'>{item.itemStatus}</td>
+                <td className='text-center'>
+                    <div className="btn-group" role="group">
+                        <ModifyItem />
+                        <DeleteItem />
+                    </div>
+                </td>
+            </tr>
+        )
+    })
+
     return (
         <div>
-            <table class="table table-bordered">
+            <table className="table table-bordered">
                 <thead>
                     <tr>
                         <th scope="col">ItemName</th>
@@ -14,23 +47,7 @@ export default function ViewItems() {
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">2</th>
-                        <td>Jacob</td>
-                        <td>Thornton</td>
-                        <td>@fat</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">3</th>
-                        <td colspan="2">Larry the Bird</td>
-                        <td>@twitter</td>
-                    </tr>
+                {dispayData}
                 </tbody>
             </table>
         </div>

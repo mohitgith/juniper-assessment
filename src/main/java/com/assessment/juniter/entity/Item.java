@@ -18,7 +18,7 @@ public class Item {
     private Integer itemId;
     @Column(nullable = false)
     private String itemName;
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String itemEnteredByUser;
     @Column(nullable = false)
     private LocalDateTime itemEnteredDate;
